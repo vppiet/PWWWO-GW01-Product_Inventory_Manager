@@ -1,0 +1,54 @@
+{
+  "name": "pwwwo-gw01-product-inventory-manager",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11"
+  },
+  "description": "Product Inventory Manager aims to provide a simple and coherent solution for managing user's inventory.",
+  "main": "app.js",
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vppiet/PWWWO-GW01-Product_Inventory_Manager.git"
+  },
+  "keywords": [
+    "product",
+    "inventory",
+    "management"
+  ],
+  "contributors": [
+    {
+      "name": "Veikka Hämäläinen",
+      "email": "veikka.hamalainen@edu.turkuamk.fi"
+    },
+    {
+      "name": "Ville Pietarinen",
+      "email": "ville.pietarinen@edu.turkuamk.fi"
+    },
+    {
+      "name": "Mikko Saarimaa",
+      "email": "mikko.saarimaa@edu.turkuamk.fi"
+    },
+    {
+      "name": "Aleksi Valojää",
+      "email": "aleksi.valojaa@edu.turkuamk.fi"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vppiet/PWWWO-GW01-Product_Inventory_Manager/issues"
+  },
+  "homepage": "https://github.com/vppiet/PWWWO-GW01-Product_Inventory_Manager#readme"
+}

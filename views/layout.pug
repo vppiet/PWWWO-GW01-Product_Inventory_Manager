@@ -2,5 +2,8 @@ doctype html
 html
   include includes/head.pug
   body
-    block content
-    include includes/foot.pug
+    main(role='main').container-fluid
+      block content
+
+    footer.container-fluid
+      include includes/foot.pug

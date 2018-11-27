@@ -1,12 +1,12 @@
 extends layout
 
 block content
-    unless categories.length || vendors.length || producers.length
-        unless categories.length
+    unless categories || vendors || producers
+        unless categories
             div(role='alert').alert.alert-danger Create a product category first!
-        unless vendors.length
+        unless vendors
             div(role='alert').alert.alert-danger Create a vendor first!
-        unless producers.length
+        unless producers
             div(role='alert').alert.alert-danger Create a producer first!
     else
         form(method='POST', action='')
@@ -33,7 +33,7 @@ block content
                 select#vendor.form-control(type='select', placeholder='Select vendor', name='vendor', required='true')
                     for vendor in vendors
                         if product
-                            option(value=vendor._id, selected=(vendor._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                            option(value=vendor._id, selected=(vendor._id.toString()==product.vendor._id.toString() ? 'selected' : false)) #{vendor.company_name}
                         else
                             option(value=vendor._id) #{vendor.company_name}
             div.form-group
@@ -41,7 +41,7 @@ block content
                 select#producer.form-control(type='select', placeholder='Select producer', name='producer', required='true')
                     for producer in producers
                         if product
-                            option(value=producer._id, selected=(producer._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                            option(value=producer._id, selected=(producer._id.toString()==product.producer._id.toString() ? 'selected' : false)) #{producer.company_name}
                         else
                             option(value=producer._id) #{producer.company_name}
             div.form-group

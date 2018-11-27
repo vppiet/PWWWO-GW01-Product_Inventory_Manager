@@ -17,10 +17,10 @@ router.get('/product/create', product_controller.product_create_get);
 //router.get('/product/:id/delete', product_controller.product_delete_get);
 //// POST:    delete a product
 //router.get('/product/:id/', product_controller.product_delete_post);
-//// GET:     update a product
-//router.get('/product/:id/update', product_controller.product_update_get);
-//// GET:     update a product
-//router.get('/product/:id/update', product_controller.product_update_post);
+// GET:     update a product
+router.get('/product/:id/update', product_controller.product_update_get);
+//// POST:    update a product
+//router.post('/product/:id/update', product_controller.product_update_post);
 //// GET:     product details
 router.get('/product/:id', product_controller.product_detail);
 // GET:     list products.

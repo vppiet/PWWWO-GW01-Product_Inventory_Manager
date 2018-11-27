@@ -60,3 +60,22 @@ module.exports.product_create_get = (req, res, next) => {
     });
 
 };
+
+// Display product details.
+module.exports.product_detail = (req, res, next) => {
+    Product.findById(req.params.id)
+    .populate('category')
+    .populate('vendor')
+    .populate('producer')
+    .exec((err, product) => {
+        if (err) { return next(err); }
+        if (product==null) {
+            var err = new Error('Product not found.');
+            err.status = 404;
+            return next(err);
+        }
+        res.render('product_detail', { title: 'Product Detail', product: product });
+    });
+};
+
+//

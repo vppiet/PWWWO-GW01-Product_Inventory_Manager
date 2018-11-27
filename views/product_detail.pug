@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href='/product/' + product._id + '/update').d-inline
+            i.fas.fa-edit
+        a(href='/product/' + product._id + '/delete').d-inline.ml-3
+            i.fas.fa-trash-alt
+
+    table.table
+        thead.thead-light
+            tr
+                th(scope='col') Field
+                th(scope='col') Value
+        tbody
+            tr
+                th(scope='row') ID:
+                td= product.id
+            tr
+                th(scope='row') Name:
+                td= product.name
+            tr
+                th(scope='row') Category:
+                td= product.category.name
+            tr
+                th(scope='row') Description:
+                td= product.description
+            tr
+                th(scope='row') In Stock:
+                td= product.in_stock
+            tr
+                th(scope='row') Stock Last Updated:
+                td= product.stock_last_updated
+            tr
+                th(scope='row') Units in Package:
+                td= product.units_in_package
+            tr
+                th(scope='row') Vendor:
+                td= product.vendor.company_name
+            tr
+                th(scope='row') Producer:
+                td= product.producer.company_name

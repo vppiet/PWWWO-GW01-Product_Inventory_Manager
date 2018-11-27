@@ -2,27 +2,28 @@ extends layout
 
 block content
     table.table
-        thead
+        thead.thead-light
             tr.bg-light
                 th(scope='col') Name
                 th(scope='col') Count
+        tbody
             tr
                 td
-                    a(href='/inventory/products', title='Products') Products
+                    a(href='/inventory/product', title='Products') Products
                 td
                     =data.product_count
             tr
                 td
-                    a(href='/inventory/productcategories', title='Product Categories') Product Categories
+                    a(href='/inventory/productcategory', title='Product Categories') Product Categories
                 td
                     =data.productcategory_count
             tr
                 td
-                    a(href='/inventory/producers', title='Producers') Producers
+                    a(href='/inventory/producer', title='Producers') Producers
                 td
                     =data.producer_count
             tr
                 td
-                    a(href='/inventory/vendors', title='Vendors') Vendors
+                    a(href='/inventory/vendor', title='Vendors') Vendors
                 td
                     =data.vendor_count

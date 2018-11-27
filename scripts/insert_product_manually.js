@@ -1,3 +1,6 @@
+// ONLY USED MANUALLY
+'use strict'
+
 var mongoose = require('mongoose');
 var async = require('async');
 
@@ -57,49 +60,49 @@ db.on('error', console.error.bind(console, 'MongoDB connection error'));
 //});
 
 // SAVE NEW PRODUCT
-let productDetails = {
-    name:   'Jaffa',
-    category: 'beverage',
-    description: 'Jaffa is a popular carbonated soft drink produced in Finland by Hartwall. Jaffa is usually orange flavoured, however different flavours are sold.',
-    in_stock: 105,
-    units_in_package: 24,
-    vendor: 'Hartwall',
-    producer:   'Hartwall'
-};
-
-async.parallel({
-    category: (callback) => {
-        ProductCategory.findOne({name: productDetails.category}, '_id')
-        .exec(callback);
-    },
-    vendor: (callback) => {
-        Vendor.findOne({ company_name: productDetails.vendor }, '_id')
-        .exec(callback);
-    },
-    producer: (callback) => {
-        Producer.findOne({ company_name: productDetails.producer}, '_id')
-        .exec(callback);
-    }
-}, (err, results) => {
-    if (err) {
-        db.close();
-        return console.log('Error:', err);
-    }
-    let product = new Product({
-        name:               productDetails.name,
-        category:           results.category._id,
-        description:        productDetails.description,
-        in_stock:           productDetails.in_stock,
-        units_in_package:   productDetails.units_in_package,
-        vendor:             results.vendor._id,
-        producer:           results.producer._id
-    });
-    product.save((err) => {
-        if (err) {
-            db.close();
-            return console.log('Error:', err);
-        }
-        console.log('Successful.');
-        db.close();
-    });
-});
+//let productDetails = {
+//    name:   'Jaffa',
+//    category: 'beverage',
+//    description: 'Jaffa is a popular carbonated soft drink produced in Finland by Hartwall. Jaffa is usually orange flavoured, however different flavours are sold.',
+//    in_stock: 105,
+//    units_in_package: 24,
+//    vendor: 'Hartwall',
+//    producer:   'Hartwall'
+//};
+//
+//async.parallel({
+//    category: (callback) => {
+//        ProductCategory.findOne({name: productDetails.category}, '_id')
+//        .exec(callback);
+//    },
+//    vendor: (callback) => {
+//        Vendor.findOne({ company_name: productDetails.vendor }, '_id')
+//        .exec(callback);
+//    },
+//    producer: (callback) => {
+//        Producer.findOne({ company_name: productDetails.producer}, '_id')
+//        .exec(callback);
+//    }
+//}, (err, results) => {
+//    if (err) {
+//        db.close();
+//        return console.log('Error:', err);
+//    }
+//    let product = new Product({
+//        name:               productDetails.name,
+//        category:           results.category._id,
+//        description:        productDetails.description,
+//        in_stock:           productDetails.in_stock,
+//        units_in_package:   productDetails.units_in_package,
+//        vendor:             results.vendor._id,
+//        producer:           results.producer._id
+//    });
+//    product.save((err) => {
+//        if (err) {
+//            db.close();
+//            return console.log('Error:', err);
+//        }
+//        console.log('Successful.');
+//        db.close();
+//    });
+//});

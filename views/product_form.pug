@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    unless categories.length || vendors.length || producers.length
+        unless categories.length
+            div(role='alert').alert.alert-danger Create a product category first!
+        unless vendors.length
+            div(role='alert').alert.alert-danger Create a vendor first!
+        unless producers.length
+            div(role='alert').alert.alert-danger Create a producer first!
+    else
+        form(method='POST', action='')
+            div.form-group
+                label(for='name') Name: 
+                input#name.form-control(type='text', placeholder='Name of product', name='name', required='true', value=(undefined==product ? '' : product.name))
+            div.form-group
+                label(for='category') Category: 
+                select#category.form-control(type='select', placeholder='Select category', name='category', required='true')
+                for category in categories
+                    if product
+                        option(value=category._id, selected=(category._id.toString()==product.category._id.toString() ? 'selected' : false)) #{category.name}
+                    else
+                        option(value=category._id) #{category.name}
+
+            div.form-group
+                label(for='in_stock') Units in stock: 
+                input#in_stock.form-control(type='number', placeholder='Product quantity in stock', required='true', value=(undefined==product ? 0 : product.in_stock))
+            div.form-group
+                label(for='units_in_package') Units in package: 
+                input#units_in_package.form-control(type='number', placeholder='Product units in package', name='units_in_package', value=(undefined==product ? 1 : product.units_in_package), required='true')
+            div.form-group
+                label(for='vendor') Vendor: 
+                select#vendor.form-control(type='select', placeholder='Select vendor', name='vendor', required='true')
+                for vendor in vendors
+                    if product
+                        option(value=vendor._id, selected=(vendor._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                    else
+                        option(value=vendor._id) #{vendor.company_name}
+            div.form-group
+                label(for='producer') Producer:
+                select#producer.form-control(type='select', placeholder='Select producer', name='producer', required='true')
+                for producer in producers
+                    if product
+                        option(value=producer._id, selected=(producer._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                    else
+                        option(value=producer._id) #{producer.company_name}

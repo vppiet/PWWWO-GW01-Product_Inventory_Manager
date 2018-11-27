@@ -1,19 +1,27 @@
 extends layout
 
 block content
-    h1= title
+    div.container-fluid.my-3
+        a(href='/inventory/products/create', role='button').btn.btn-primary Create Product
 
     table.table
         thead
             tr
                 th(scope='col') Name
-                th(scope='col') Type
-                th(scope='col') Units in stock
-        each product in product_list
+                th(scope='col') Category
+                th(scope='col') In stock
+                th(scope='col') Stock Last Updated
+        each product in products
             tr
-                td= product.name
-                td= product.type.name
-                td= product.units_in_stock
+                td
+                    a(href=product.url, title='Product: ' + product.name)
+                        =product.name
+                td
+                    =product.productcategory.name
+                td
+                    =product.in_stock
+                td
+                    =product.stock_last_updated
         else
             tr.table-warning
-                td(colspan=3) No products found.
+                td(colspan=4) No products found.

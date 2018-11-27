@@ -14,7 +14,7 @@ This repository contains an implemented web application for a groupwork assignme
 (Placeholder for instructions)
 
 ## Collaborators
-- Veikka Hämäläinen
+- [Veikka Hämäläinen](https://github.com/hamvei)
 - [Ville Pietarinen](https://github.com/vppiet)
-- Mikko Saarimaa
-- Aleksi Valojää
+- [Mikko Saarimaa](https://github.com/mikkosaarimaa)
+- [Aleksi Valojää](https://github.com/Avaloja16)

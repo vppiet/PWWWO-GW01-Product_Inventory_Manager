@@ -1,9 +1,10 @@
 doctype html
 html
-  include includes/head.pug
-  body
-    main(role='main').container-fluid
-      block content
+    include includes/head.pug
+    body
+        main(role='main').container-fluid.col-lg-8
+            h4= title
+            block content
 
-    footer.container-fluid
-      include includes/foot.pug
+        footer.container-fluid
+            include includes/foot.pug

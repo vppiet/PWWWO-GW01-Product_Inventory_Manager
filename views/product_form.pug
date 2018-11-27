@@ -16,11 +16,11 @@ block content
             div.form-group
                 label(for='category') Category: 
                 select#category.form-control(type='select', placeholder='Select category', name='category', required='true')
-                for category in categories
-                    if product
-                        option(value=category._id, selected=(category._id.toString()==product.category._id.toString() ? 'selected' : false)) #{category.name}
-                    else
-                        option(value=category._id) #{category.name}
+                    for category in categories
+                        if product
+                            option(value=category._id, selected=(category._id.toString()==product.category._id.toString() ? 'selected' : false)) #{category.name}
+                        else
+                            option(value=category._id) #{category.name}
 
             div.form-group
                 label(for='in_stock') Units in stock: 
@@ -31,16 +31,23 @@ block content
             div.form-group
                 label(for='vendor') Vendor: 
                 select#vendor.form-control(type='select', placeholder='Select vendor', name='vendor', required='true')
-                for vendor in vendors
-                    if product
-                        option(value=vendor._id, selected=(vendor._id.toString()==product.vendor._id.toString() ? 'selected' : false))
-                    else
-                        option(value=vendor._id) #{vendor.company_name}
+                    for vendor in vendors
+                        if product
+                            option(value=vendor._id, selected=(vendor._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                        else
+                            option(value=vendor._id) #{vendor.company_name}
             div.form-group
                 label(for='producer') Producer:
                 select#producer.form-control(type='select', placeholder='Select producer', name='producer', required='true')
-                for producer in producers
-                    if product
-                        option(value=producer._id, selected=(producer._id.toString()==product.vendor._id.toString() ? 'selected' : false))
-                    else
-                        option(value=producer._id) #{producer.company_name}
+                    for producer in producers
+                        if product
+                            option(value=producer._id, selected=(producer._id.toString()==product.vendor._id.toString() ? 'selected' : false))
+                        else
+                            option(value=producer._id) #{producer.company_name}
+            div.form-group
+                button(type='submit').btn.btn-primary Submit
+
+    if errors
+        for error in errors
+            div(role='alert').alert.alert-danger
+                error.msg

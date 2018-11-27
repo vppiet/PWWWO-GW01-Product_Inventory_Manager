@@ -2,26 +2,39 @@ extends layout
 
 block content
     div.container-fluid.my-3
-        a(href='/inventory/products/create', role='button').btn.btn-primary Create Product
+        a(href='/inventory/product/create', role='button').btn.btn-primary Create Product
 
     table.table
-        thead
+        thead.thead-light
             tr
+                th(scope='col') ID
                 th(scope='col') Name
                 th(scope='col') Category
                 th(scope='col') In stock
                 th(scope='col') Stock Last Updated
+                th(scope='col') Update
+                th(scope='col') Delete
+        tbody
         each product in products
             tr
                 td
-                    a(href=product.url, title='Product: ' + product.name)
-                        =product.name
+                    a(href='/inventory/product/' + product._id, title='Product Detail')
+                        =product._id
                 td
-                    =product.productcategory.name
+                    =product.name
+                td
+                    =product.category.name
                 td
                     =product.in_stock
                 td
                     =product.stock_last_updated
+                td
+                    a(href='/product/' + product._id + '/update')
+                        i.fas.fa-edit
+                td
+                    a(href='/product/' + product._id + '/delete')
+                        i.fas.fa-trash-alt
+
         else
             tr.table-warning
-                td(colspan=4) No products found.
+                td(colspan=6) No products found.

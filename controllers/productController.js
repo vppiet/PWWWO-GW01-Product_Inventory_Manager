@@ -22,6 +22,7 @@ module.exports.overview = (req, res, next) => {
         }
     }, (err, results) => {
         if (err) { return next(err); }
+
         res.render('overview', { title: 'Overview', data: results });
     });
 
@@ -36,6 +37,7 @@ module.exports.product_list = (req, res, next) => {
     .populate('producer')
     .exec((err, results) => {
         if (err) { return next(err); }
+
         res.render('product_list', { title: 'Products', products: results });
     });
 
@@ -56,6 +58,7 @@ module.exports.product_create_get = (req, res, next) => {
         }
     }, (err, results) => {
         if (err) { return next(err); }
+
         res.render('product_form', { title: 'Create Product', categories: results.categories, vendors: results.vendors, producers: results.producers });
     });
 
@@ -69,13 +72,46 @@ module.exports.product_detail = (req, res, next) => {
     .populate('producer')
     .exec((err, product) => {
         if (err) { return next(err); }
-        if (product==null) {
+
+        if (product == null) {
             var err = new Error('Product not found.');
             err.status = 404;
             return next(err);
         }
-        res.render('product_detail', { title: 'Product Detail', product: product });
+
+        res.render('product_detail', { title: 'Product Detail: ' + product._id, product: product });
     });
 };
 
-//
+// Display update form.
+module.exports.product_update_get = (req, res, next) => {
+
+    async.parallel({
+        product: (callback) => {
+            Product.findById(req.params.id)
+            .populate('category')
+            .populate('vendor')
+            .populate('producer')
+            .exec(callback)
+        },
+        categories: (callback) => {
+            ProductCategory.find(callback);
+        },
+        vendors: (callback) => {
+            Vendor.find(callback);
+        },
+        producers: (callback) => {
+            Producer.find(callback);
+        }
+    }, (err, results) => {
+        if (err) { return next(err); }
+
+        if (results.product == null) {
+            var err = new Error('Product not found.');
+            err.status = 404;
+            return next(err);
+        }
+
+        res.render('product_form', { title: 'Update Product: ' + results.product._id, product: results.product, categories: results.categories, vendors: results.vendors, producers: results.producers });
+    });
+};

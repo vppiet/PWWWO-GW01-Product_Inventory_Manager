@@ -10,8 +10,17 @@ Product Inventory Manager aims to provide a simple and coherent solution for man
 
 This repository contains an implemented web application for a groupwork assignment of the course Palvelinpuolen WWW-ohjelmointi in Turku University of Applied Sciences.
 
-## Deployment and Usage
-(Placeholder for instructions)
+## Deployment
+1. Install dependencies: `npm install`
+2. Create config directory into which place default.json containing MongoDB connection string as follows:
+```json
+{
+  "database": {
+	"connectionstring": ""
+  }
+}
+```
+3. Deploy: `npm start` or `npm run devstart`.
 
 ## Collaborators
 - [Veikka Hämäläinen](https://github.com/hamvei)

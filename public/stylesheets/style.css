@@ -1,4 +1,72 @@
 body {
-  font-size:  100%;
-  padding:    3em;
+  font-size: 100%;
+  padding: 3em;
+  font: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #4a4e4f;
+  text-decoration: none;
+}
+
+/* Navigointi-palkin muotoilu */
+nav {
+  background: #bec9c9;
+  padding: 0em 2em;
+  height: 3.5em;  
+}
+
+/* Unordered list:n muotoilu */
+ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  background: #bec9c9;
+}
+
+/* List item:n muotoilu */
+li {
+  display: block;
+  float: left;
+  position: relative;
+  padding: 1em;
+  transition-duration: 0.5s;
+  font-weight: bold;
+}
+
+/* List item:n eli yksittäisten valikkopainikkeiden muotoilu kun hiiren vie valikon päälle */
+li:hover {
+  cursor: pointer;
+  background: #dceeef;
+}
+
+/* Valikkopainikkeiden tekstin muotoilu */
+ul a li, li a:hover {
+  text-decoration: none;
+  color: #4a4e4f;
+}
+
+/* Alhaalle ilmestyvien valikoiden muotoilu: ovat oletusarvoisesti piilossa */
+ul li ul {
+   visibility: hidden;
+   position: absolute;
+   display: none;
+   left: 0;
+   min-width: 15em;
+   margin-top: 1em;
+}
+
+/* Alhaalle ilmestyvien valikoiden muotoilu: tulevat näkyviin kun hiiren vie ko. valikkopainikkeen päälle päävalikossa */
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  display: block;
+  background: #bec9c9;
+}
+
+/* Alhaalle ilmestyvien valikoiden tekstin muotoilu */
+ul li ul li {
+  clear: both;
+  width: 100%;
+  font-weight: normal;
 }

@@ -54,6 +54,7 @@ ul li ul {
    left: 0;
    min-width: 15em;
    margin-top: 1em;
+   box-shadow: 0.25em 0.5em 0.25em #d3dbdb;
 }
 
 /* Alhaalle ilmestyvien valikoiden muotoilu: tulevat näkyviin kun hiiren vie ko. valikkopainikkeen päälle päävalikossa */

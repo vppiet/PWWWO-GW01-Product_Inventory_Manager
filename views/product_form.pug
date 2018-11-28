@@ -21,13 +21,15 @@ block content
                             option(value=category._id, selected=(category._id.toString()==product.category._id.toString() ? 'selected' : false)) #{category.name}
                         else
                             option(value=category._id) #{category.name}
-
+            div.form-group
+                label(for='description') Description
+                textarea(rows='3', placeholder='Details about product')#description.form-control
             div.form-group
                 label(for='in_stock') Units in stock: 
-                input#in_stock.form-control(type='number', placeholder='Product quantity in stock', required='true', value=(undefined==product ? 0 : product.in_stock))
+                input#in_stock.form-control(type='number', placeholder='Product quantity in stock', name='in_stock', required='true', value=(undefined==product ? 0 : product.in_stock), min='0')
             div.form-group
                 label(for='units_in_package') Units in package: 
-                input#units_in_package.form-control(type='number', placeholder='Product units in package', name='units_in_package', value=(undefined==product ? 1 : product.units_in_package), required='true')
+                input#units_in_package.form-control(type='number', placeholder='Product units in package', name='units_in_package', value=(undefined==product ? 1 : product.units_in_package), required='true', min='1')
             div.form-group
                 label(for='vendor') Vendor: 
                 select#vendor.form-control(type='select', placeholder='Select vendor', name='vendor', required='true')
@@ -50,4 +52,4 @@ block content
     if errors
         for error in errors
             div(role='alert').alert.alert-danger
-                error.msg
+                =error.msg

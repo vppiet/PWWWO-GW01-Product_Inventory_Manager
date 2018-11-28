@@ -12,7 +12,6 @@ a {
 /* Navigointi-palkin muotoilu */
 nav {
   background: #bec9c9;
-  padding: 0em 2em;
   height: 3.5em;  
 }
 
@@ -29,7 +28,7 @@ li {
   display: block;
   float: left;
   position: relative;
-  padding: 1em;
+  padding: 1em 1.2em;
   transition-duration: 0.5s;
   font-weight: bold;
 }
@@ -55,6 +54,7 @@ ul li ul {
    min-width: 15em;
    margin-top: 1em;
    box-shadow: 0.25em 0.5em 0.25em #d3dbdb;
+   z-index: 2;
 }
 
 /* Alhaalle ilmestyvien valikoiden muotoilu: tulevat näkyviin kun hiiren vie ko. valikkopainikkeen päälle päävalikossa */
@@ -70,4 +70,13 @@ ul li ul li {
   clear: both;
   width: 100%;
   font-weight: normal;
+}
+
+/* Taulukon reunat ja tekstin alleviivauksen poisto */
+table {
+  border: 1px solid #d3dbdb;
+}
+
+td a:hover {
+  text-decoration: none;
 }

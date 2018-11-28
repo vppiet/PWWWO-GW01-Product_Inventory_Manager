@@ -12,7 +12,7 @@ router.get('/', product_controller.overview);
 // GET:     create a product.
 router.get('/product/create', product_controller.product_create_get);
 // POST:    create a product.
-//router.post('/product/create', product_controller.product_create_post);
+router.post('/product/create', product_controller.product_create_post);
 //// GET:     delete a product
 //router.get('/product/:id/delete', product_controller.product_delete_get);
 //// POST:    delete a product

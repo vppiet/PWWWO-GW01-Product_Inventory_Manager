@@ -2,7 +2,12 @@ var Product = require('../models/product');
 var ProductCategory = require('../models/productcategory');
 var Producer = require('../models/producer');
 var Vendor = require('../models/vendor');
+
 var async = require('async');
+
+const { body, validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+
 
 // Overview: Display counts of collections.
 module.exports.overview = (req, res, next) => {
@@ -28,7 +33,7 @@ module.exports.overview = (req, res, next) => {
 
 };
 
-// List products.
+// List all products.
 module.exports.product_list = (req, res, next) => {
 
     Product.find({})
@@ -43,7 +48,7 @@ module.exports.product_list = (req, res, next) => {
 
 };
 
-// Create product.
+// Display form for creating a product.
 module.exports.product_create_get = (req, res, next) => {
 
     async.parallel({
@@ -64,6 +69,85 @@ module.exports.product_create_get = (req, res, next) => {
 
 };
 
+// Validate, sanitize and save submitted product.
+// Return an array of middleware to router.
+module.exports.product_create_post = [
+    // Validate.
+    body('name', 'Invalid value for Name.')
+        .trim()
+        .isLength({ min: 1, max: 100 }).withMessage('Name must be at least one character and most 100 characters long.')
+        .isAlphanumeric().withMessage('Name must contain only alphanumerics.'),
+
+    body('category', 'Invalid value for Category.')
+        .isMongoId(),
+
+    body('description', 'Invalid value for Description.')
+        .trim()
+        .isLength({ max: 1000 }).withMessage('Description should be at most 1000 characters long.'), // optional field: no min
+
+    body('in_stock', 'Invalid value for In Stock.')
+        .isInt().withMessage('In Stock must be an integer.')
+        .isInt({ min: 0 }).withMessage('In Stock must be equal or greater than zero.'),
+
+    body('units_in_package', 'Invalid value for Units in Package.')
+        .isInt().withMessage('Units in Package must be an integer.')
+        .isInt({ min: 1 }).withMessage('Units In Package must be equal or greater than one.'),
+
+    body('vendor', 'Invalid value for Vendor.')
+        .isMongoId(),
+
+    body('producer', 'Invalid value for Producer.')
+        .isMongoId(),
+
+    // Sanitize.
+    sanitizeBody('*').trim().escape(),
+
+    // Process request.
+    (req, res, next) => {
+        const errors = validationResult(req);
+        console.log(errors); // DEBUG
+
+        let product = new Product({
+            name:               req.body.name,
+            category:           req.body.category,
+            in_stock:           req.body.in_stock,
+            units_in_package:   req.body.units_in_package,
+            vendor:             req.body.vendor,
+            producer:           req.body.producer
+        });
+
+        if (req.body.description) { product.description = req.body.description }
+
+        if (!errors.isEmpty()) {
+            // Errors found.
+
+            async.parallel({
+                categories: (callback) => {
+                    ProductCategory.find(callback);
+                },
+                vendors: (callback) => {
+                    Vendor.find(callback);
+                },
+                producers: (callback) => {
+                    Producer.find(callback);
+                }
+            }, (err, results) => {
+                if (err) { return next(err); }
+
+                res.render('product_form', { title: 'Create Product', errors: errors.array(), product: product, categories: results.categories, vendors: results.vendors, producers: results.producers });
+            });
+            return;
+        }
+        else {
+            // Form data is valid. Save product.
+            product.save((err) => {
+                if (err) { return next(err) };
+                res.redirect('/inventory/product/' + product._id);
+            });
+        }
+    }
+];
+
 // Display product details.
 module.exports.product_detail = (req, res, next) => {
     Product.findById(req.params.id)
@@ -83,7 +167,7 @@ module.exports.product_detail = (req, res, next) => {
     });
 };
 
-// Display update form.
+// Display form for updating a product.
 module.exports.product_update_get = (req, res, next) => {
 
     async.parallel({

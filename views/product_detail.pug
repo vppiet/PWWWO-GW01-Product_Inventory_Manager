@@ -2,9 +2,9 @@ extends layout
 
 block content
     div.container-fluid.my-3
-        a(href='/inventory/product/' + product._id + '/update', title='Update Product').d-inline
+        a(href=product.url + '/update', title='Update Product').d-inline
             i.fas.fa-edit
-        a(href='/inventory/product/' + product._id + '/delete', title='Delete Product').d-inline.ml-3
+        a(href=product.url + '/delete', title='Delete Product').d-inline.ml-3
             i.fas.fa-trash-alt
 
     table.table

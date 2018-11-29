@@ -14,11 +14,10 @@ var ProductSchema = new Schema({
 });
 
 // Virtual for product's URL.
-// WHY IT DOESN'T WORK IN PRODUCT_DETAIL.PUG??? this._id gives undefined.
 ProductSchema
 .virtual('url')
-.get(() => {
-    return '/inventory/products/' + this._id;
+.get(function () {
+    return '/inventory/product/' + this._id;
 });
 
 // Export model.

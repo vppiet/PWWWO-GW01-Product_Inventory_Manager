@@ -18,7 +18,7 @@ block content
         each product in products
             tr
                 td
-                    a(href='/inventory/product/' + product._id, title='Product Detail')
+                    a(href=product.url, title='Product Detail')
                         =product._id
                 td
                     =product.name
@@ -29,10 +29,10 @@ block content
                 td
                     =product.stock_last_updated
                 td
-                    a(href='/inventory/product/' + product._id + '/update')
+                    a(href=product.url + '/update')
                         i.fas.fa-edit
                 td
-                    a(href='/inventory/product/' + product._id + '/delete')
+                    a(href=product.url + '/delete')
                         i.fas.fa-trash-alt
 
         else

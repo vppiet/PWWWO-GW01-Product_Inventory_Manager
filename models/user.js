@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 // Schema description.
 var UserSchema = new Schema({
     username:      { type: String, required: true, index: { unique: true }, minlength: 4, maxlength: 100 },
-    password:      { type: String, required: true, minlength: 10, maxlength: 100 }
+    googleId:       String
 });
 
 // Prehook for hashing passwords before saving.

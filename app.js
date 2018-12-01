@@ -56,11 +56,6 @@ app.use(cookieSession({
   keys: [keys.session.cookieKey]
 })); 
 
-//initialize passport
-app.use(passport.initialize()); 
-app.use(passport.session());
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

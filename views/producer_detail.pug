@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href=producer.url + '/update', title='Update Producer').d-inline
+            i.fas.fa-edit
+        a(href=producer.url + '/delete', title='Delete Producer').d-inline.ml-3
+            i.fas.fa-trash-alt
+
+    table.table
+        thead.thead-light
+            tr
+                th(scope='col') Field
+                th(scope='col') Value
+        tbody
+            tr
+                th(scope='row') ID:
+                td= producer._id
+            tr
+                th(scope='row') Company Name:
+                td= producer.company_name
+            tr
+                th(scope='row') Contact Person:
+                td= producer.contact_person
+            tr
+                th(scope='row') E-mail address:
+                td= producer.email
+            tr
+                th(scope='row') Phone number:
+                td= producer.phone

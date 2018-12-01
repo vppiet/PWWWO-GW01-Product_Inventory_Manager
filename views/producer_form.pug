@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    form(method='POST', action='')
+        div.form-group
+            label(for='company_name') Company Name:
+            input#company_name.form-control(type='text', placeholder='Name of company', name='company_name', required='true')
+        div.form-group
+            label(for='description') Description:
+            textarea(rows='3', placeholder='Details about producer')#description.form-control
+        div.form-group
+            label(for='contact_person') Contact Person:
+            input#contact_person.form-control(type='text', placeholder='Contact person name', name='contact_person', required='true')
+        div.form-group
+            label(for='email') E-mail Address:
+            input#email.form-control(type='text', placeholder='E-mail address', name='email', required='true')
+        div.form-group
+            label(for='phone') Phone Number:
+            input#phone.form-control(type='text', placeholder='Phone number', name='phone', required='true')
+        div.form-group
+            button(type='submit').btn.btn-primary Submit
+
+    if errors
+        for error in errors
+            div(role='alert').alert.alert-danger
+                =error.msg

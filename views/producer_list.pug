@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href='/inventory/producer/create', role='button').btn.btn-primary Create Producer
+
+    table.table
+        thead.thead-light
+            tr
+                th(scope='col') ID
+                th(scope='col') Company Name
+                th(scope='col') Contact Person
+                th(scope='col') Email
+                th(scope='col') Phone
+                th(scope='col') Update
+                th(scope='col') Delete
+        tbody
+        each producer in producers
+            tr
+                td
+                    a(href=producer.url, title='Producer Detail')
+                        =producer._id
+                td
+                    =producer.company_name
+                td
+                    =producer.contact_person
+                td
+                    =producer.email
+                td
+                    =producer.phone
+                td
+                    a(href=producer.url + '/update')
+                        i.fas.fa-edit
+                td
+                    a(href=producer.url + '/delete')
+                        i.fas.fa-trash-alt
+
+        else
+            tr.table-warning
+                td(colspan=6) No producers found.

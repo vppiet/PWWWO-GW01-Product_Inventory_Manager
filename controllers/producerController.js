@@ -139,29 +139,17 @@ module.exports.producer_detail = (req, res, next) => {
 // Display form for updating a producer.
 module.exports.producer_update_get = (req, res, next) => {
 
-    async.parallel({
-        producer: (callback) => {
-            Producer.findById(req.params.id)
-            .populate('company_name')
-            .populate('contact_person')
-            .populate('email')
-            .populate('phone')
-            .exec(callback)
-        },
-        producers: (callback) => {
-            Producer.find(callback);
-        }
-    }, (err, results) => {
-        if (err) { return next(err); }
+        Producer.findById(req.params.id, (err, producer) => {
+            if (err) { return next(err); }
+            if (producer == null) {
+                var err = new Error('Producer not found.');
+                err.status = 404;
+                return next(err);
+            }
 
-        if (results.producer == null) {
-            var err = new Error('Producer not found.');
-            err.status = 404;
-            return next(err);
-        }
+            res.render('producer_form', { title: 'Update Producer: ' + producer._id, producer: producer });
+        });
 
-        res.render('producer_form', { title: 'Update Producer: ' + results.producer._id, producer: results.producer, producers: results.producers });
-    });
 };
 
 // Delete producer

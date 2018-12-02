@@ -23,7 +23,9 @@ block content
                             option(value=category._id) #{category.name}
             div.form-group
                 label(for='description') Description
-                textarea(rows='3', placeholder='Details about product')#description.form-control
+                textarea(rows='3', placeholder='Details about product', name='description')#description.form-control
+                    if product && product.description
+                        = product.description
             div.form-group
                 label(for='in_stock') Units in stock: 
                 input#in_stock.form-control(type='number', placeholder='Product quantity in stock', name='in_stock', required='true', value=(undefined==product ? 0 : product.in_stock), min='0')

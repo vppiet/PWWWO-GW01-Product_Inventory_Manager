@@ -2,5 +2,6 @@ extends layout
 
 block content
   h5= message
-  h6= error.status
-  pre #{error.stack} <!-- Remove in production -->
+  if error
+    h6= error.status
+    pre #{error.stack} <!-- Remove in production -->

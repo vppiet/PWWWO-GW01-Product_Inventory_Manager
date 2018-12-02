@@ -21,7 +21,7 @@ router.post('/product/create', product_controller.product_create_post);
 // GET:     update a product
 router.get('/product/:id/update', product_controller.product_update_get);
 //// POST:    update a product
-//router.post('/product/:id/update', product_controller.product_update_post);
+router.post('/product/:id/update', product_controller.product_update_post);
 //// GET:     product details
 router.get('/product/:id', product_controller.product_detail);
 // GET:     list products.

@@ -105,7 +105,6 @@ module.exports.product_create_post = [
     // Process request.
     (req, res, next) => {
         const errors = validationResult(req);
-        console.log(errors); // DEBUG
 
         let product = new Product({
             name:               req.body.name,
@@ -199,3 +198,92 @@ module.exports.product_update_get = (req, res, next) => {
         res.render('product_form', { title: 'Update Product: ' + results.product._id, product: results.product, categories: results.categories, vendors: results.vendors, producers: results.producers });
     });
 };
+
+// Validate, sanitize and save updated product.
+// Return an array of middlewares to router.
+module.exports.product_update_post = [
+    // Validate.
+    body('name', 'Invalid value for Name.')
+    .trim()
+    .isLength({ min: 1, max: 100 }).withMessage('Name must be at least one character and most 100 characters long.')
+    .isAlphanumeric().withMessage('Name must contain only alphanumerics.'),
+
+    body('category', 'Invalid value for Category.')
+        .isMongoId(),
+
+    body('description', 'Invalid value for Description.')
+        .trim()
+        .isLength({ max: 1000 }).withMessage('Description should be at most 1000 characters long.'), // optional field: no min
+
+    body('in_stock', 'Invalid value for In Stock.')
+        .isInt().withMessage('In Stock must be an integer.')
+        .isInt({ min: 0 }).withMessage('In Stock must be equal or greater than zero.'),
+
+    body('units_in_package', 'Invalid value for Units in Package.')
+        .isInt().withMessage('Units in Package must be an integer.')
+        .isInt({ min: 1 }).withMessage('Units In Package must be equal or greater than one.'),
+
+    body('vendor', 'Invalid value for Vendor.')
+        .isMongoId(),
+
+    body('producer', 'Invalid value for Producer.')
+        .isMongoId(),
+
+    // Sanitize.
+    sanitizeBody('*').trim().escape(),
+
+    // Process request.
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        var product = new Product({
+            name:               req.body.name,
+            category:           req.body.category,
+            description:        (req.body.description) ? req.body.description : null,
+            in_stock:           req.body.in_stock,
+            units_in_package:   req.body.units_in_package,
+            vendor:             req.body.vendor,
+            producer:           req.body.producer,
+            _id:                req.params.id
+        });
+
+        if(!errors.isEmpty()) {
+
+            async.parallel({
+                categories: (callback) => {
+                    ProductCategory.find(callback);
+                },
+                vendors: (callback) => {
+                    Vendor.find(callback);
+                },
+                producers: (callback) => {
+                    Producer.find(callback);
+                }
+            }, (err, results) => {
+                if (err) { return next(err); }
+
+                res.render('product_form', { title: 'Update Product: ' + product._id, errors: errors, categories: results.categories, vendors: results.vendors, producers: results.producers });
+            })
+        }
+        else {
+            // Check for in_stock change and update stock_last_updated with current Date.
+            Product.findById(req.params.id, 'in_stock')
+            .exec((err, results) => {
+                if (err) { return next(err); }
+
+                if (req.body.in_stock != results.in_stock) {
+                    product.in_stock = req.body.in_stock;
+                    product.stock_last_updated = Date.now();
+                }
+
+                // Update product.
+                Product.findByIdAndUpdate(req.params.id, product)
+                .exec((err) => {
+                    if (err) { return next(err); }
+
+                    res.redirect(product.url);
+                });
+            });
+        }
+    }
+];

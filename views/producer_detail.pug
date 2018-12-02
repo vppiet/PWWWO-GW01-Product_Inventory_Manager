@@ -4,7 +4,7 @@ block content
     div.container-fluid.my-3
         a(href=producer.url + '/update', title='Update Producer').d-inline
             i.fas.fa-edit
-        a(href=producer.url + '/delete', title='Delete Producer').d-inline.ml-3
+        a(href='#', onclick=`showDeleteModal('producer', '${producer._id}', '${producer.company_name}');`).d-inline.ml-3
             i.fas.fa-trash-alt
 
     table.table

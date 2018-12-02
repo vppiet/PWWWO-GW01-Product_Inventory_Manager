@@ -14,10 +14,8 @@ router.get('/', product_controller.overview);
 router.get('/product/create', product_controller.product_create_get);
 // POST:    create a product.
 router.post('/product/create', product_controller.product_create_post);
-//// GET:     delete a product
-//router.get('/product/:id/delete', product_controller.product_delete_get);
 //// POST:    delete a product
-//router.get('/product/:id/', product_controller.product_delete_post);
+router.post('/product/:id/delete', product_controller.product_delete_post);
 // GET:     update a product
 router.get('/product/:id/update', product_controller.product_update_get);
 //// POST:    update a product

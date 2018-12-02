@@ -32,7 +32,7 @@ block content
                     a(href=producer.url + '/update')
                         i.fas.fa-edit
                 td
-                    a(href=producer.url + '/delete')
+                    a(href='#', onclick=`showDeleteModal('producer', '${producer._id}', '${producer.company_name}');`).d-inline.ml-3
                         i.fas.fa-trash-alt
 
         else

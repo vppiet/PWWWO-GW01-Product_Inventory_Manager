@@ -123,10 +123,6 @@ module.exports.producer_create_post = [
 // Display producer details.
 module.exports.producer_detail = (req, res, next) => {
     Producer.findById(req.params.id)
-    .populate('company_name')
-    .populate('contact_person')
-    .populate('email')
-    .populate('phone')
     .exec((err, producer) => {
         if (err) { return next(err); }
 
@@ -159,7 +155,7 @@ module.exports.producer_update_get = (req, res, next) => {
         if (err) { return next(err); }
 
         if (results.producer == null) {
-            var err = new Error('Product not found.');
+            var err = new Error('Producer not found.');
             err.status = 404;
             return next(err);
         }
@@ -167,3 +163,12 @@ module.exports.producer_update_get = (req, res, next) => {
         res.render('producer_form', { title: 'Update Producer: ' + results.producer._id, producer: results.producer, producers: results.producers });
     });
 };
+
+// Delete producer
+module.exports.producer_delete_post = (req, res, next) => {
+    console.log(req.body);
+    Producer.findByIdAndDelete(req.body.id, (err) => {
+        if (err) { next(err); }
+        res.json({ redirect: '/inventory/producer'});
+    });
+}

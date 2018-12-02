@@ -287,3 +287,12 @@ module.exports.product_update_post = [
         }
     }
 ];
+
+// Delete product
+module.exports.product_delete_post = (req, res, next) => {
+    console.log(req.body);
+    Product.findByIdAndDelete(req.body.id, (err) => {
+        if (err) { next(err); }
+        res.json({ redirect: '/inventory/product'});
+    });
+}

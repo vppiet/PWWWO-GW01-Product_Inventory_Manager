@@ -7,7 +7,5 @@ var UserSchema = new Schema({
     githubId:      String
 });
 
-
-
 // Export model.
 module.exports = mongoose.model('User', UserSchema);

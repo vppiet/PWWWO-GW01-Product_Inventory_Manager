@@ -8,18 +8,18 @@ router.get('/login', (req, res) => {
 }); 
 
 //authorize logout 
-router.get('logout', (req, res) => {
+router.get('/logout', (req, res) => {
     // handle with passport
     req.logout();
     app.redirect('/');
 });
 
-//authorize with google 
+//authorize with github
 router.get('/github', passport.authenticate('github', {
     scope: ['profile']
 })); 
 
-//callback route for google to redirect to 
+//callback route for github to redirect to 
 router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
     res.redirect('/profile'); 
 });

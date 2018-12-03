@@ -69,7 +69,7 @@ module.exports.productcategory_create_post = [
     (req, res, next) => {
         const errors = validationResult(req);
 
-        let product = new ProductCategory({
+        let productcategory = new ProductCategory({
             name:     req.body.name,
         });
 

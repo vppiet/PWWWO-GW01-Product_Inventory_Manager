@@ -7,15 +7,5 @@ var UserSchema = new Schema({
     googleId:       String
 });
 
-// Prehook for hashing passwords before saving.
-UserSchema.pre('save', (next) => {
-    // do hashing here
-});
-
-// Static method for authenticating user.
-UserSchema.static('authenticate', (username, password) => {
-    // authenticate here
-});
-
 // Export model.
 module.exports = mongoose.model('User', UserSchema);

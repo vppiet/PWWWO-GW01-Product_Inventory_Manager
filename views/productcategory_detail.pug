@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href=productcategory.url + '/update', title='Update Product Category').d-inline
+            i.fas.fa-edit
+        a(href='#', onclick=`showDeleteModal('productcategory', '${productcategory._id}', '${productcategory.name}');`).d-inline.ml-3
+            i.fas.fa-trash-alt
+
+    table.table
+        thead.thead-light
+            tr
+                th(scope='col') Field
+                th(scope='col') Value
+        tbody
+            tr
+                th(scope='row') ID:
+                td= productcategory.id
+            tr
+                th(scope='row') Name:
+                td= productcategory.name
+            tr
+                th(scope='row') Description:
+                td= productcategory.description
+

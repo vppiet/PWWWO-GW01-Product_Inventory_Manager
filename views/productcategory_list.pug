@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href='/inventory/productcategory/create', role='button').btn.btn-primary Create Product Category
+
+    table.table
+        thead.thead-light
+            tr
+                th(scope='col') ID
+                th(scope='col') Name
+                th(scope='col') Description
+                th(scope='col') Update
+                th(scope='col') Delete
+        tbody
+        each productcategory in productcategories
+            tr
+                td
+                    a(href=productcategory.url, title='Product Category Detail')
+                        =productcategory._id
+                td
+                    =productcategory.name
+                td
+                    =productcategory.description
+                td
+                    a(href=productcategory.url + '/update')
+                        i.fas.fa-edit
+                td
+                    a(href='#', onclick=`showDeleteModal('productcategory', '${productcategory._id}', '${productcategory.name}');`)
+                        i.fas.fa-trash-alt
+
+        else
+            tr.table-warning
+                td(colspan=6) No product categories found.
+

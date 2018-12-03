@@ -5,6 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var config = require('config');
+const authRoutes = require('./routes/auth-routes'); 
+const profileRoutes = require('./routes/profile-routes'); 
+const passportSetup = require('./config/passport-setup'); 
+const keys = require('./config/keys'); 
+const cookieSession = require('cookie-session'); 
+const passport = require('passport'); 
 
 var indexRouter = require('./routes/index');
 var inventoryRouter = require('./routes/inventory');
@@ -26,6 +32,15 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000, 
+  keys: [keys.session.cookieKey]
+})); 
+
+//initialize passport
+app.use(passport.initialize()); 
+app.use(passport.session()); 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +49,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/inventory', inventoryRouter);
+app.use('/auth', authRoutes); 
+app.use('/profile', profileRoutes); 
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

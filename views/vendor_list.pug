@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    div.container-fluid.my-3
+        a(href='/inventory/vendor/create', role='button').btn.btn-primary Create Vendor
+    
+    table.table
+        thead.thead-light
+            th(scope='col') ID
+            th(scope='col') Company Name
+            th(scope='col') Contact Person
+            th(scope='col') Update
+            th(scope='col') Delete
+        tbody
+        each vendor in vendors
+            tr
+                td
+                    a(href=vendor.url, title='Vendor Detail')
+                        =vendor._id
+                td
+                    =vendor.company_name
+                td
+                    =vendor.contact_person
+                td
+                    a(href=vendor.url + '/update')
+                        i.fas.fa-edit
+                td
+                    a(href='#', onclick=`showDeleteModal('vendor', '${vendor._id}', '${vendor.company_name}');`)
+                        i.fas.fa-trash-alt
+
+        else
+            tr.table-warning
+                td(colspan=5) No vendors found.

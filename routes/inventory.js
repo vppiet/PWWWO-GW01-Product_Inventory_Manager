@@ -5,6 +5,7 @@ var router = express.Router();
 var product_controller = require('../controllers/productController');
 var producer_controller = require('../controllers/producerController');
 var productcategory_controller = require ('../controllers/productcategoryController.js');
+var vendor_controller = require('../controllers/vendorController');
 
 /// INDEX ///
 // GET for inventory home page (overview).
@@ -43,7 +44,20 @@ router.get('/productcategory/:id', productcategory_controller.productcategory_de
 router.get('/productcategory', productcategory_controller.productcategory_list);
 
 /// VENDOR ROUTES ///
-
+// GET:     create a vendor.
+router.get('/vendor/create', vendor_controller.vendor_create_get);
+// POST:    create a vendor.
+router.post('/vendor/create', vendor_controller.vendor_create_post);
+// POST:    delete a vendor.
+router.post('/vendor/:id/delete', vendor_controller.vendor_delete_post);
+// GET:     update a vendor.
+router.get('/vendor/:id/update', vendor_controller.vendor_update_get);
+// POST:    update a vendor.
+router.post('/vendor/:id/update', vendor_controller.vendor_update_post);
+// GET:     vendor details.
+router.get('/vendor/:id', vendor_controller.vendor_detail);
+// GET:     list vendors.
+router.get('/vendor', vendor_controller.vendor_list);
 
 /// PRODUCER ROUTES ///
 // GET:     create a producer

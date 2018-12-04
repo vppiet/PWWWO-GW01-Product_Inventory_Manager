@@ -6,7 +6,7 @@ Product Inventory Manager aims to provide a simple and coherent solution for man
 - list all data objects
 - update a data object
 - remove a data object
-- access web application via a REST API
+- access web application via a REST API (not implemented)
 
 This repository contains an implemented web application for a groupwork assignment of the course Palvelinpuolen WWW-ohjelmointi in Turku University of Applied Sciences.
 

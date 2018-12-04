@@ -9,5 +9,11 @@ var VendorSchema = new Schema({
     phone:          { type: String, required: true, minlength: 10, maxlength: 20 }
 });
 
+VendorSchema
+.virtual('url')
+.get(function () {
+    return '/inventory/vendor/' + this._id;
+});
+
 // Export model.
 module.exports = mongoose.model('Vendor', VendorSchema);

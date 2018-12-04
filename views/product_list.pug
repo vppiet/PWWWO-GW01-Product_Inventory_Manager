@@ -15,26 +15,26 @@ block content
                 th(scope='col') Update
                 th(scope='col') Delete
         tbody
-        each product in products
-            tr
-                td
-                    a(href=product.url, title='Product Detail')
-                        =product._id
-                td
-                    =product.name
-                td
-                    =product.category.name
-                td
-                    =product.in_stock
-                td
-                    =product.stock_last_updated
-                td
-                    a(href=product.url + '/update')
-                        i.fas.fa-edit
-                td
-                    a(href='#', onclick=`showDeleteModal('product', '${product._id}', '${product.name}');`)
-                        i.fas.fa-trash-alt
+            each product in products
+                tr
+                    td
+                        a(href=product.url, title='Product Detail')
+                            =product._id
+                    td
+                        =product.name
+                    td
+                        =product.category.name
+                    td
+                        =product.in_stock
+                    td
+                        =product.stock_last_updated
+                    td
+                        a(href=product.url + '/update')
+                            i.fas.fa-edit
+                    td
+                        a(href='#', onclick=`showDeleteModal('product', '${product._id}', '${product.name}');`)
+                            i.fas.fa-trash-alt
 
-        else
-            tr.table-warning
-                td(colspan=6) No products found.
+            else
+                tr.table-warning
+                    td(colspan=6) No products found.

@@ -12,22 +12,22 @@ block content
             th(scope='col') Update
             th(scope='col') Delete
         tbody
-        each vendor in vendors
-            tr
-                td
-                    a(href=vendor.url, title='Vendor Detail')
-                        =vendor._id
-                td
-                    =vendor.company_name
-                td
-                    =vendor.contact_person
-                td
-                    a(href=vendor.url + '/update')
-                        i.fas.fa-edit
-                td
-                    a(href='#', onclick=`showDeleteModal('vendor', '${vendor._id}', '${vendor.company_name}');`)
-                        i.fas.fa-trash-alt
+            each vendor in vendors
+                tr
+                    td
+                        a(href=vendor.url, title='Vendor Detail')
+                            =vendor._id
+                    td
+                        =vendor.company_name
+                    td
+                        =vendor.contact_person
+                    td
+                        a(href=vendor.url + '/update')
+                            i.fas.fa-edit
+                    td
+                        a(href='#', onclick=`showDeleteModal('vendor', '${vendor._id}', '${vendor.company_name}');`)
+                            i.fas.fa-trash-alt
 
-        else
-            tr.table-warning
-                td(colspan=5) No vendors found.
+            else
+                tr.table-warning
+                    td(colspan=5) No vendors found.

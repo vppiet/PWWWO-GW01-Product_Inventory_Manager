@@ -15,26 +15,26 @@ block content
                 th(scope='col') Update
                 th(scope='col') Delete
         tbody
-        each producer in producers
-            tr
-                td
-                    a(href=producer.url, title='Producer Detail')
-                        =producer._id
-                td
-                    =producer.company_name
-                td
-                    =producer.contact_person
-                td
-                    =producer.email
-                td
-                    =producer.phone
-                td
-                    a(href=producer.url + '/update')
-                        i.fas.fa-edit
-                td
-                    a(href='#', onclick=`showDeleteModal('producer', '${producer._id}', '${producer.company_name}');`).d-inline.ml-3
-                        i.fas.fa-trash-alt
+            each producer in producers
+                tr
+                    td
+                        a(href=producer.url, title='Producer Detail')
+                            =producer._id
+                    td
+                        =producer.company_name
+                    td
+                        =producer.contact_person
+                    td
+                        =producer.email
+                    td
+                        =producer.phone
+                    td
+                        a(href=producer.url + '/update')
+                            i.fas.fa-edit
+                    td
+                        a(href='#', onclick=`showDeleteModal('producer', '${producer._id}', '${producer.company_name}');`).d-inline.ml-3
+                            i.fas.fa-trash-alt
 
-        else
-            tr.table-warning
-                td(colspan=6) No producers found.
+            else
+                tr.table-warning
+                    td(colspan=6) No producers found.
